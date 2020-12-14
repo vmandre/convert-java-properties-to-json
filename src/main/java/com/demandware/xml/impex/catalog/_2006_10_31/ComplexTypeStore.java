@@ -1,6 +1,4 @@
 package com.demandware.xml.impex.catalog._2006_10_31;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -17,23 +15,23 @@ import com.google.gson.JsonObject;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ComplexTypeStore {
     
-    private static Map<String, String> storeInfo = new HashMap<String, String>();
+//    private static Map<String, String> storeEmail = new HashMap<String, String>();
     static {
-        storeInfo.put("02", "NZ-NSN|nelson@noelleeming.co.nz");
-        storeInfo.put("40", "NZ-AUK|albany@noelleeming.co.nz");
-        storeInfo.put("H4", "NZ-AUK|nlh4h4@noelleeming.co.nz");
-        storeInfo.put("H5", "NZ-AUK|nlh5h5@noelleeming.co.nz");
-        storeInfo.put("qs", "NZ-AUK|nlqsqs@noelleeming.co.nz");
-        storeInfo.put("sl", "NZ-AUK|nlslsl@noelleeming.co.nz");
-        storeInfo.put("13", "NZ-CAN|nl1313@noelleeming.co.nz");
-        storeInfo.put("ka", "NZ-NTL|nlkaka@noelleeming.co.nz");
-        storeInfo.put("Wa", "NZ-WKO|nlwawa@noelleeming.co.nz");
-        storeInfo.put("31", "NZ-CAN|ashburton@noelleeming.co.nz");
-        storeInfo.put("32", "NZ-CAN|collcentre@noelleeming.co.nz");
-        storeInfo.put("33", "NZ-CAN|greymouth@noelleeming.co.nz");
-        storeInfo.put("34", "NZ-CAN|hornby@noelleeming.co.nz");
-        storeInfo.put("35", "NZ-CAN|moorhouse@noelleeming.co.nz");
-        storeInfo.put("36", "NZ-CAN|greymouth@noelleeming.co.nz");
+////        storeEmail.put("02", "nelson@noelleeming.co.nz");
+////        storeEmail.put("40", "albany@noelleeming.co.nz");
+////        storeEmail.put("H4", "nlh4h4@noelleeming.co.nz");
+////***        storeEmail.put("H5", "nlh5h5@noelleeming.co.nz");
+////***        storeEmail.put("qs", "nlqsqs@noelleeming.co.nz");
+////***        storeEmail.put("sl", "nlslsl@noelleeming.co.nz");
+////        storeEmail.put("13", "nl1313@noelleeming.co.nz");
+//        storeEmail.put("ka", "nlkaka@noelleeming.co.nz");
+//        storeEmail.put("Wa", "nlwawa@noelleeming.co.nz");
+////        storeEmail.put("31", "ashburton@noelleeming.co.nz");
+//        storeEmail.put("32", "collcentre@noelleeming.co.nz");
+//        storeEmail.put("33", "greymouth@noelleeming.co.nz");
+//        storeEmail.put("34", "hornby@noelleeming.co.nz");
+//        storeEmail.put("35", "moorhouse@noelleeming.co.nz");
+//        storeEmail.put("36", "greymouth@noelleeming.co.nz");
     }
 
     @XmlAttribute(name = "store-id", required = true)
@@ -133,53 +131,96 @@ public class ComplexTypeStore {
     public void setCustomAttributes(SharedTypeCustomAttributes customAttributes) {
         this.customAttributes = customAttributes;
     }
-    public ComplexTypeStore build(Entry<String, JsonElement> item) {
+    public ComplexTypeStore build(Entry<String, JsonElement> item, JsonElement jsonStateCode) {
         JsonObject jsonObject = item.getValue().getAsJsonObject();
         this.storeId = item.getKey();
         this.name = jsonObject.get("name").getAsString();
 
-        if (jsonObject.get("streetAddress").isJsonArray()) {
-            JsonArray jsonArray = jsonObject.get("streetAddress").getAsJsonArray();
-            
-            if (jsonArray.size() == 3) {
-                this.address1 = jsonArray.get(0).getAsString() +", " + jsonArray.get(1).getAsString().substring(0, jsonArray.get(1).getAsString().lastIndexOf("\n"));
-                this.address2 = jsonArray.get(1).getAsString().substring(jsonArray.get(1).getAsString().lastIndexOf("\n")+1);
-                this.city = jsonArray.get(2).getAsString();
-            } else if (jsonArray.size() == 2) {
-                String item0 = jsonArray.get(0).getAsString();
-                String item1 = jsonArray.get(1).getAsString();
-
-                if (item1.contains("\n")) {
-                    this.address1 = item0.replaceAll("\n", ", ");
-                    this.address2 = item1.substring(0, item1.lastIndexOf("\n"));
-                    this.city = item1.substring(item1.lastIndexOf("\n")+1);
-                } else if (item0.contains("\n")) {
-                    this.address1 = item0.substring(0, item0.lastIndexOf("\n")).replaceAll("\n", ", ");
-                    this.address2 = item0.substring(item0.lastIndexOf("\n")+1);
-                    this.city = item1;
-                }
-            }
-        } else {
+//        if (jsonObject.get("streetAddress").isJsonArray()) {
+//            JsonArray jsonArray = jsonObject.get("streetAddress").getAsJsonArray();
+//            
+//            if (jsonArray.size() == 3) {
+//                this.address1 = jsonArray.get(0).getAsString() +", " + jsonArray.get(1).getAsString().substring(0, jsonArray.get(1).getAsString().lastIndexOf("\n"));
+//                this.address2 = jsonArray.get(1).getAsString().substring(jsonArray.get(1).getAsString().lastIndexOf("\n")+1);
+//                this.city = jsonArray.get(2).getAsString();
+//            } else if (jsonArray.size() == 2) {
+//                String item0 = jsonArray.get(0).getAsString();
+//                String item1 = jsonArray.get(1).getAsString();
+//
+//                if (item1.contains("\n")) {
+//                    this.address1 = item0.replaceAll("\n", ", ");
+//                    this.address2 = item1.substring(0, item1.lastIndexOf("\n"));
+//                    this.city = item1.substring(item1.lastIndexOf("\n")+1);
+//                } else if (item0.contains("\n")) {
+//                    this.address1 = item0.substring(0, item0.lastIndexOf("\n")).replaceAll("\n", ", ");
+//                    this.address2 = item0.substring(item0.lastIndexOf("\n")+1);
+//                    this.city = item1;
+//                }
+//            }
+//        } else {
             String address = jsonObject.get("streetAddress").getAsString();
-            this.city = address.substring(address.lastIndexOf("\n")+1);
-            String s = address.substring(0, address.lastIndexOf("\n"));
-
-            if (s.contains("\n")) {
-                String[] split = s.split("\n");
-                this.address1 = split[0];
-                this.address2 = split[1];
-            } else {
-                this.address1 = s;
-                this.address2 = this.city;
+            String[] split = address.split("\n");
+            
+            if (split.length == 2) {
+                this.address1 = split[0].replaceAll("\n", ", ");
+                
+                if (split[1].contains(",")) {
+                    String[] split2 = split[1].split(",");
+                    if (split2[0].trim().equals(split2[1].trim())) {
+                        this.city = split2[1].trim();
+                    } else {
+                        this.address2 = split2[0];
+                        this.city = split2[1].trim();
+                    }
+                    
+                } else {
+                    this.city = split[1].trim();
+                }
+            } else if (split.length == 3) {
+                
+                if (split[1].contains(",")) {
+                    String[] split2 = split[1].split(",");
+                    this.address2 = split2[1].trim();
+                    this.address1 = split[0].concat(", ").concat(split2[0]);
+                    this.city = split[2].trim();
+                } else {
+                    this.address1 = split[0].concat(", ").concat(split[1]);
+                    
+                    if (split[2].contains(", ")) {
+                        String[] split2 = split[2].split(",");
+                        
+                        if (split2[0].trim().equals(split2[1].trim())) {
+                            this.city = split2[1].trim();
+                        } else {
+                            this.address2 = split2[0];
+                            this.city = split2[1].trim();
+                        }
+                    } else {
+                        this.city = split[2].trim();
+                    }
+                }
+            } else if (split.length == 4) {
+                this.address1 = split[0].concat(", ").concat(split[1]);
+                this.address2 = split[2];
+                this.city = split[3].trim();
+                System.out.println("bla: " + address.replaceAll("\n", ", ") + " items: " + address.replaceAll("\n", ", ").split(",").length);
+            } else { 
+                this.address1 = split[0].concat(", ").concat(split[1]);
+                for (int i = 0; i < split.length-2; i++) {
+                    this.address1 += split[i] + ", ";
+                }
+                this.address1 = this.address1.substring(0, this.address1.lastIndexOf(","));
+                this.address2 = split[split.length-2];
+                this.city = split[split.length-1];
             }
-        }
+//        }
 
-        String storeInfo = ComplexTypeStore.storeInfo.get(this.storeId);
-        
-        this.postalCode = "0612";
-        this.stateCode =  storeInfo != null ? storeInfo.substring(0, storeInfo.indexOf("|")) :  "";
+        this.postalCode = jsonObject.get("postalCode").getAsString();
+        this.stateCode =  this.getStateCodeByRegion(jsonStateCode, this.storeId);
         this.countryCode = "NZ";
-        this.email = storeInfo != null ? storeInfo.substring(storeInfo.indexOf("|")+1) :  "";
+        if (jsonObject.get("email") != null) {
+            this.email = jsonObject.get("email").getAsString();
+        }
         this.phone = jsonObject.get("phone").getAsString();
         this.latitude = jsonObject.get("latitude").getAsString();
         this.longitude = jsonObject.get("longitude").getAsString();
@@ -187,15 +228,17 @@ public class ComplexTypeStore {
 
         SharedTypeCustomAttribute googlePlaceId = new SharedTypeCustomAttribute();
         googlePlaceId.setAttributeId("googlePlaceId");
-//        googlePlaceId.getContent().add("PLACEHOLDER-ChIJs0q6R7dBDW0RNL7tW2W3VX8");
-        googlePlaceId.getContent().add("");
+        googlePlaceId.getContent().add(jsonObject.get("googlePlaceID").getAsString());
         this.customAttributes.getCustomAttribute().add(googlePlaceId);
 
         SharedTypeCustomAttribute pageDescription = new SharedTypeCustomAttribute();
         pageDescription.setAttributeId("pageDescription");
         pageDescription.setLang("x-default");
-        pageDescription.getContent().add(String.format("Check out the opening hours, closing hours and store location for Noel Leeming in %s. Get more store information at noelleeming.co.nz/stores. Visit us today!", this.name));
-        this.customAttributes.getCustomAttribute().add(pageDescription);
+
+        if (jsonObject.get("extraDescription") != null) {
+            pageDescription.getContent().add(jsonObject.get("extraDescription").getAsString());
+            this.customAttributes.getCustomAttribute().add(pageDescription);
+        }
 
         SharedTypeCustomAttribute pageTitle = new SharedTypeCustomAttribute();
         pageTitle.setAttributeId("pageTitle");
@@ -221,6 +264,14 @@ public class ComplexTypeStore {
         return this;
     }
 
+    private String getStateCodeByRegion(JsonElement jsonElement, String storeId) {
+        for (Entry<String, JsonElement> item : jsonElement.getAsJsonObject().entrySet()) {
+            if (item.getValue().toString().contains(storeId)) {
+                return item.getKey();
+            }
+        }
+        return null;
+    }
     private void addWeekDay(JsonArray jsonArray, String weekDay, JsonElement jsonElement) {
         if (jsonElement != null) {
             jsonArray.add(this.formatHour(weekDay, jsonElement));
@@ -229,23 +280,22 @@ public class ComplexTypeStore {
 
     private String formatHour(String weekDay, JsonElement jsonElement) {
         String s = jsonElement.getAsString();
-//        s = s.replaceAll("am", "").replaceAll("pm", "");
-//        if (s.indexOf(".") == 1) {
-//            s = "0" + s;
-//        }
-
-//TODO verificar este trecho        
-        
-        String hour = replaceHour(s.substring(s.indexOf("–")+1, s.indexOf("–")+2));
-        s = s.replace(s.substring(s.indexOf("–")+1, s.indexOf("–")+2), hour);
         s = s.replaceAll("am", "").replaceAll("pm", "");
-        if (s.indexOf(".") == 1) {
-            s = "0" + s;
-        }
         s = StringUtils.replaceChars(s, '.', ':');
-        return weekDay.concat(" ").concat(s);
+
+        String[] split = s.split("–");
+        String openingHour = split[0];
+        String closeHour = split[1];
+
+        String hour = replaceHour(closeHour.substring(0, closeHour.indexOf(":")));
+        closeHour = closeHour.replace(closeHour.substring(0, closeHour.indexOf(":")+1), hour + ":");
+
+        if (openingHour.indexOf(":") == 1) {
+            openingHour = "0" + openingHour;
+        }
+        return weekDay.concat(" ").concat(openingHour).concat("-").concat(closeHour);
     }
-    
+
     private String replaceHour(String hour) {
         switch (hour) {
         case "1":
